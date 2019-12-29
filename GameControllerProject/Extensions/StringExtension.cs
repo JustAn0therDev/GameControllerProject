@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
+using GameControllerProject.Domain.Arguments.Player;
+using System;
 
 namespace GameControllerProject.Domain.Extensions
 {
@@ -17,7 +19,6 @@ namespace GameControllerProject.Domain.Extensions
                 sb.Append(item.ToString("x2"));
 
             return sb.ToString();
-
         }
     }
 }

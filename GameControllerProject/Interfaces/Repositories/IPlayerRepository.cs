@@ -1,11 +1,13 @@
-﻿using GameControllerProject.Domain.Arguments.Player;
-using GameControllerProject.Domain.Entities;
+﻿using GameControllerProject.Domain.Entities;
+using System.Collections.Generic;
 
 namespace GameControllerProject.Domain.Interfaces.Repositories
 {
     public interface IPlayerRepository
     {
-        AuthenticatePlayerResponse Authenticate(string email, string password);
-        AddPlayerResponse AddPlayer(Player playerToBeAdded);
+        //Repositório sempre devolve a entidade.
+        Player Authenticate(string email, string password);
+        Player AddPlayer(Player playerToBeAdded);
+        List<Player> GetAllPlayers();
     }
 }

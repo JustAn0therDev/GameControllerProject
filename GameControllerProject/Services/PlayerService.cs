@@ -4,6 +4,8 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameControllerProject.Domain.Services
 {
@@ -29,6 +31,7 @@ namespace GameControllerProject.Domain.Services
 
         public AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest)
         {
+            AddPlayerResponse response = new AddPlayerResponse();
             Name name = new Name(addPlayerRequest.Name.FirstName, addPlayerRequest.Name.LastName);
             Email email = new Email(addPlayerRequest.Email);
             string password = addPlayerRequest.Password;
@@ -38,14 +41,16 @@ namespace GameControllerProject.Domain.Services
             if (IsInvalid())
                 return null;
 
-            AddPlayerResponse response = _playerRepository.AddPlayer(player);
+            player = _playerRepository.AddPlayer(player);
+
+            if (player == null) return null;
+
             response.Message = "Player added successfully";
-            return response;
+            return (AddPlayerResponse)player;
         }
 
         public AuthenticatePlayerResponse Authenticate(AuthenticatePlayerRequest authenticatePlayerRequest)
         {
-            AuthenticatePlayerResponse response = new AuthenticatePlayerResponse();
             Email email = new Email(authenticatePlayerRequest.Email);
             string password = authenticatePlayerRequest.Password;
 
@@ -57,11 +62,26 @@ namespace GameControllerProject.Domain.Services
                 return null;
 
             if (_playerRepository != null)
-                response = _playerRepository.Authenticate(email.Address, password);
+                player = _playerRepository.Authenticate(email.Address, password);
 
-            response.Message = "The player was successfully authenticated.";
+            return (AuthenticatePlayerResponse)player;
+        }
 
-            return response;
+        public ModifyPlayerResponse ModifyPlayer(ModifyPlayerRequest modifyPlayerRequest)
+        {
+            Name name = new Name(modifyPlayerRequest.Player.Name.FirstName, modifyPlayerRequest.Player.Name.LastName);
+            Email email = new Email(modifyPlayerRequest.Player.Email.Address);
+
+            //get by id no banco para saber se o jogador a ser modificado já existe.
+            Player player = new Player(email, "12345");
+
+            //comparar os dados que foram encontrados no banco com os dados que foram recebidos.
+            return (ModifyPlayerResponse)player;
+        }
+
+        public List<ListAllPlayersResponse> ListAllPlayers()
+        {
+            return _playerRepository.GetAllPlayers().Select(s => (ListAllPlayersResponse)s).ToList();
         }
 
         #endregion
