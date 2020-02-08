@@ -4,6 +4,7 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -69,13 +70,32 @@ namespace GameControllerProject.Domain.Services
 
         public ModifyPlayerResponse ModifyPlayer(ModifyPlayerRequest modifyPlayerRequest)
         {
-            Name name = new Name(modifyPlayerRequest.Player.Name.FirstName, modifyPlayerRequest.Player.Name.LastName);
-            Email email = new Email(modifyPlayerRequest.Player.Email.Address);
+            if (modifyPlayerRequest == null)
+            {
+                AddNotification("ModifyPlayerRequest", "Request can't be responded without parameters.");
+                return null;
+            }
 
-            //get by id no banco para saber se o jogador a ser modificado já existe.
-            Player player = new Player(email, "12345");
+            var player = _playerRepository.GetPlayerById(modifyPlayerRequest.Id);
 
-            //comparar os dados que foram encontrados no banco com os dados que foram recebidos.
+            if (player == null)
+            {
+                AddNotification("Id", "Player not Found.");
+                return null;
+            }
+
+            var name = new Name(modifyPlayerRequest.FirstName, modifyPlayerRequest.LastName);
+            var email = new Email(modifyPlayerRequest.Email);
+
+            player.ModifyPlayer(name, email);
+
+            AddNotifications(player);
+
+            if (IsInvalid())
+                return null;
+
+            _playerRepository.ModifyPlayer(player);
+
             return (ModifyPlayerResponse)player;
         }
 

@@ -27,7 +27,8 @@ namespace GameControllerProject.Domain.Entities
             Password = password;
             Status = PlayerStatus.Pending;
 
-            new AddNotifications<Player>(this).IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
+            new AddNotifications<Player>(this)
+                .IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
 
             if (IsValid())
                 Password = password.ConvertToMD5();
@@ -41,7 +42,8 @@ namespace GameControllerProject.Domain.Entities
             Password = password;
             Status = PlayerStatus.Pending;
 
-            new AddNotifications<Player>(this).IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
+            new AddNotifications<Player>(this)
+                .IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
 
             if (IsValid())
                 Password = password.ConvertToMD5();
@@ -56,6 +58,18 @@ namespace GameControllerProject.Domain.Entities
         public void ModifyPlayerStatus(int status)
         {
             Status = (PlayerStatus)status;
+        }
+
+        public void ModifyPlayer(Name name, Email email, PlayerStatus status)
+        {
+            Name = name;
+            Email = email;
+            Status = status;
+
+            new AddNotifications<Player>(this)
+                .IfFalse(Status == PlayerStatus.Active, "The player needs to be active to be modified.");
+
+            AddNotifications(Name, Email);
         }
 
         #endregion

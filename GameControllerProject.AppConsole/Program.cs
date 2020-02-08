@@ -16,12 +16,13 @@ namespace GameControllerProject.AppConsole
             var playerService = new PlayerService(_playerRepository);
             Console.WriteLine("Instance of PlayerService class created.");
 
-            var request = new AuthenticatePlayerRequest();
+            var request = new ModifyPlayerRequest();
             Console.WriteLine("Request object instance created");
             request.Email = "ruanmontelo@gmail.com";
-            request.Password = "SuperNintendo14";
+            request.FirstName = "Ruan";
+            request.LastName = "Montelo";
 
-            var response = playerService.Authenticate(request);
+            var response = playerService.ModifyPlayer(request);
 
             if (response == null)
                 Console.WriteLine("Invalid request");

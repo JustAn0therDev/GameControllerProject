@@ -1,9 +1,13 @@
 ﻿using GameControllerProject.Domain.Interfaces.Arguments;
+using System;
 
 namespace GameControllerProject.Domain.Arguments.Player
 {
     public class ModifyPlayerRequest : IRequest
     {
-        public GameControllerProject.Domain.Entities.Player Player { get; set; }
+        public Guid Id { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
