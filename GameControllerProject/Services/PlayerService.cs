@@ -1,5 +1,6 @@
 ﻿using GameControllerProject.Domain.Arguments.Player;
 using GameControllerProject.Domain.Entities;
+using GameControllerProject.Domain.Enums;
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
@@ -87,7 +88,7 @@ namespace GameControllerProject.Domain.Services
             var name = new Name(modifyPlayerRequest.FirstName, modifyPlayerRequest.LastName);
             var email = new Email(modifyPlayerRequest.Email);
 
-            player.ModifyPlayer(name, email);
+            player.ModifyPlayer(name, email, (PlayerStatus)modifyPlayerRequest.Status);
 
             AddNotifications(player);
 
