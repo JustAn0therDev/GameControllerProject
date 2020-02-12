@@ -256,11 +256,10 @@
     <Compile Include="Persistence\GameControllerProjectContext.cs" />
     <Compile Include="Persistence\Mapping\PlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlayerMap.cs" />
+    <Compile Include="Persistence\Repositories\PlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Persistence\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
