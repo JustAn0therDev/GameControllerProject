@@ -1,4 +1,5 @@
-﻿using GameControllerProject.Domain.Enums;
+﻿using GameControllerProject.Domain.Entities.Base;
+using GameControllerProject.Domain.Enums;
 using GameControllerProject.Domain.Extensions;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
@@ -6,11 +7,10 @@ using System;
 
 namespace GameControllerProject.Domain.Entities
 {
-    public class Player : Notifiable
+    public class Player : EntityBase
     {
         #region Public Members
 
-        public Guid Id { get; private set; }
         public Name Name { get; private set; }
         public Email Email { get; private set; }
         public string Password { get; private set; }
@@ -20,9 +20,8 @@ namespace GameControllerProject.Domain.Entities
 
         #region Constructors 
 
-        public Player(Email email, string password)
+        public Player(Email email, string password) : base()
         {
-            Id = Guid.NewGuid();
             Email = email;
             Password = password;
             Status = PlayerStatus.Pending;
@@ -34,9 +33,8 @@ namespace GameControllerProject.Domain.Entities
                 Password = password.ConvertToMD5();
         }
 
-        public Player(Name name, Email email, string password)
+        public Player(Name name, Email email, string password) : base()
         {
-            Id = Guid.NewGuid();
             Name = name;
             Email = email;
             Password = password;

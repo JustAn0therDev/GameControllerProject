@@ -256,6 +256,7 @@
     <Compile Include="Persistence\GameControllerProjectContext.cs" />
     <Compile Include="Persistence\Mapping\PlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlayerMap.cs" />
+    <Compile Include="Persistence\Repositories\Base\RepositoryBase.cs" />
     <Compile Include="Persistence\Repositories\PlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

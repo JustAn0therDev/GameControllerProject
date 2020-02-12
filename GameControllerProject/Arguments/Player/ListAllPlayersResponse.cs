@@ -7,14 +7,14 @@ namespace GameControllerProject.Domain.Arguments.Player
 {
     public class ListAllPlayersResponse : IResponse
     {
-        public GameControllerProject.Domain.Entities.Player Player { get; set; }
+        public List<Entities.Player> Players { get; set; } = new List<Entities.Player>();
         public string Message { get; set; }
 
-        public static explicit operator ListAllPlayersResponse(Entities.Player player)
+        public static explicit operator ListAllPlayersResponse(List<Entities.Player> players)
         {
             return new ListAllPlayersResponse()
             {
-                Player = player,
+                Players = players,
                 Message = "Player found successfully"
             };
         }

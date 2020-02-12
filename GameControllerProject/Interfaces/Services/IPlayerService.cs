@@ -9,6 +9,6 @@ namespace GameControllerProject.Domain.Interfaces.Services
         AuthenticatePlayerResponse Authenticate(AuthenticatePlayerRequest authenticatePlayerRequest);
         AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest);
         ModifyPlayerResponse ModifyPlayer(ModifyPlayerRequest addPlayerRequest);
-        List<ListAllPlayersResponse> ListAllPlayers();
+        ListAllPlayersResponse ListAllPlayers();
     }
 }

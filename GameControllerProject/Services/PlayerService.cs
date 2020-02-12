@@ -5,8 +5,6 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GameControllerProject.Domain.Services
@@ -43,7 +41,7 @@ namespace GameControllerProject.Domain.Services
             if (IsInvalid())
                 return null;
 
-            player = _playerRepository.AddPlayer(player);
+            player = _playerRepository.Add(player);
 
             if (player == null) return null;
 
@@ -77,7 +75,7 @@ namespace GameControllerProject.Domain.Services
                 return null;
             }
 
-            var player = _playerRepository.GetPlayerById(modifyPlayerRequest.Id);
+            var player = _playerRepository.GetById(modifyPlayerRequest.Id);
 
             if (player == null)
             {
@@ -95,14 +93,14 @@ namespace GameControllerProject.Domain.Services
             if (IsInvalid())
                 return null;
 
-            _playerRepository.ModifyPlayer(player);
+            _playerRepository.Update(player);
 
             return (ModifyPlayerResponse)player;
         }
 
-        public List<ListAllPlayersResponse> ListAllPlayers()
+        public ListAllPlayersResponse ListAllPlayers()
         {
-            return _playerRepository.GetAllPlayers().Select(s => (ListAllPlayersResponse)s).ToList();
+            return (ListAllPlayersResponse)_playerRepository.GetAll().ToList();
         }
 
         #endregion
