@@ -1,12 +1,8 @@
-﻿using GameControllerProject.Domain.Interfaces.Repositories.Base;
-using GameControllerProject.Domain.Entities;
-using GameControllerProject.Domain.Entities.Base;
+﻿using GameControllerProject.Domain.Entities.Base;
+using GameControllerProject.Domain.Interfaces.Repositories.Base;
 using System;
 using System.Data.Entity;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace GameControllerProject.Infra.Persistence.Repositories.Base
@@ -15,7 +11,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories.Base
         where TEntity : EntityBase 
         where TId : struct
     {
-        private readonly DbContext _context;
+        protected readonly DbContext _context;
 
         public RepositoryBase(DbContext context)
         {

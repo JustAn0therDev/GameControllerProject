@@ -1,10 +1,12 @@
-﻿using GameControllerProject.Domain.Arguments.Player;
+﻿using GameControllerProject.Domain.Arguments.Base;
+using GameControllerProject.Domain.Arguments.Player;
 using GameControllerProject.Domain.Entities;
 using GameControllerProject.Domain.Enums;
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
+using System;
 using System.Linq;
 
 namespace GameControllerProject.Domain.Services
@@ -61,8 +63,10 @@ namespace GameControllerProject.Domain.Services
             if (IsInvalid())
                 return null;
 
-            if (_playerRepository != null)
-                player = _playerRepository.Authenticate(email.Address, password);
+            player = _playerRepository
+                .GetBy(x => x.Email.Address == authenticatePlayerRequest.Email,
+                       x => x.Password == authenticatePlayerRequest.Password)
+                .FirstOrDefault();
 
             return (AuthenticatePlayerResponse)player;
         }
@@ -101,6 +105,11 @@ namespace GameControllerProject.Domain.Services
         public ListAllPlayersResponse ListAllPlayers()
         {
             return (ListAllPlayersResponse)_playerRepository.GetAll().ToList();
+        }
+
+        public ResponseBase DeletePlayer(Guid Id)
+        {
+            return (ResponseBase)_playerRepository.Delete(Id);
         }
 
         #endregion

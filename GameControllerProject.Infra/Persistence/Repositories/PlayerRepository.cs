@@ -1,17 +1,16 @@
 ﻿using GameControllerProject.Domain.Entities;
-using GameControllerProject.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using GameControllerProject.Infra.Persistence.Repositories.Base;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
-    class PlayerRepository : IPlayerRepository
+    class PlayerRepository : RepositoryBase<Player, Guid>
     {
-        private readonly GameControllerProjectContext _context;
+        private readonly new GameControllerProjectContext _context;
 
-        public PlayerRepository(GameControllerProjectContext context)
+        public PlayerRepository(GameControllerProjectContext context) : base(context)
         {
             _context = context;
         }

@@ -70,6 +70,19 @@ namespace GameControllerProject.Domain.Entities
             AddNotifications(Name, Email);
         }
 
+        public void AuthenticatePlayer(Email email, string password)
+        {
+            Email = email;
+            Password = password;
+            Status = PlayerStatus.Pending;
+
+            new AddNotifications<Player>(this)
+                .IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
+
+            if (IsValid())
+                Password = password.ConvertToMD5();
+        }
+
         #endregion
     }
 }

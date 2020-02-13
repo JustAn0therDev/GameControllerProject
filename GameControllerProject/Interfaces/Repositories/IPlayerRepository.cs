@@ -9,6 +9,5 @@ namespace GameControllerProject.Domain.Interfaces.Repositories
 {
     public interface IPlayerRepository : IRepositoryBase<Player, Guid>
     {
-        Player Authenticate(string email, string password);
     }
 }

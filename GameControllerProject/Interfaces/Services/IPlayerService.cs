@@ -1,6 +1,6 @@
-﻿using GameControllerProject.Domain.Arguments.Player;
-using GameControllerProject.Domain.Entities;
-using System.Collections.Generic;
+﻿using System;
+using GameControllerProject.Domain.Arguments.Player;
+using GameControllerProject.Domain.Arguments.Base;
 
 namespace GameControllerProject.Domain.Interfaces.Services
 {
@@ -10,5 +10,6 @@ namespace GameControllerProject.Domain.Interfaces.Services
         AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest);
         ModifyPlayerResponse ModifyPlayer(ModifyPlayerRequest addPlayerRequest);
         ListAllPlayersResponse ListAllPlayers();
+        ResponseBase DeletePlayer(Guid Id);
     }
 }
