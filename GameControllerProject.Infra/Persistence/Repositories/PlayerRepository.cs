@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameControllerProject.Infra.Persistence.Repositories.Base;
+using GameControllerProject.Domain.Interfaces.Repositories;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
-    class PlayerRepository : RepositoryBase<Player, Guid>
+    public class PlayerRepository : RepositoryBase<Player, Guid>, IPlayerRepository
     {
         private readonly new GameControllerProjectContext _context;
 
