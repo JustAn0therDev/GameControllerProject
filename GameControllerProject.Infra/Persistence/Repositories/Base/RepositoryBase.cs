@@ -19,99 +19,58 @@ namespace GameControllerProject.Infra.Persistence.Repositories.Base
             _context = context;
         }
 
+        public TEntity Add(TEntity entity)
+        {
+            return _context.Set<TEntity>().Add(entity);
+        }
+
+        public IEnumerable<TEntity> AddList(IEnumerable<TEntity> entities)
+        {
+            foreach (var item in entities)
+            {
+                _context.Set<TEntity>().Add(item);
+            }
+            return entities;
+        }
+
+        public void Delete(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+        }
+
+        public bool Exists(Func<TEntity, bool> func)
+        {
+            return _context.Set<TEntity>().Any(func);
+        }
+
+        public IQueryable<TEntity> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> GetAndOrderBy<TKey>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> ordem, bool ascendente = true, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
         public IQueryable<TEntity> GetBy(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            return Listar(includeProperties).Where(where);
+            throw new NotImplementedException();
         }
 
-        public IQueryable<TEntity> ListarEOrdenadosPor<TKey>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> ordem, bool ascendente = true, params Expression<Func<TEntity, object>>[] includeProperties)
+        public TEntity GetById(TId id)
         {
-            return ascendente ? ListarPor(where, includeProperties).OrderBy(ordem) : ListarPor(where, includeProperties).OrderByDescending(ordem);
+            throw new NotImplementedException();
         }
 
-        public TEntity ObterPor(Func<TEntity, bool> where, params Expression<Func<TEntity, object>>[] includeProperties)
+        public IQueryable<TEntity> GetOrderedBy<TKey>(Expression<Func<TEntity, TKey>> order, bool ascending)
         {
-            return Listar(includeProperties).FirstOrDefault(where);
+            throw new NotImplementedException();
         }
 
-        public TEntity ObterPorId(TId id, params Expression<Func<TEntity, object>>[] includeProperties)
+        public TEntity Update(TEntity entity)
         {
-            if (includeProperties.Any())
-            {
-                return Listar(includeProperties).FirstOrDefault(x => x.Id.ToString() == id.ToString());
-            }
-
-            return _context.Set<TEntity>().Find(id);
-        }
-
-        public IQueryable<TEntity> Listar(params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            IQueryable<TEntity> query = _context.Set<TEntity>();
-
-            if (includeProperties.Any())
-            {
-                return Include(_context.Set<TEntity>(), includeProperties);
-            }
-
-            return query;
-        }
-
-        public IQueryable<TEntity> ListarOrdenadosPor<TKey>(Expression<Func<TEntity, TKey>> ordem, bool ascendente = true, params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            return ascendente ? Listar(includeProperties).OrderBy(ordem) : Listar(includeProperties).OrderByDescending(ordem);
-        }
-
-        public TEntity Adicionar(TEntity entidade)
-        {
-            return _context.Set<TEntity>().Add(entidade);
-        }
-
-        public TEntity Editar(TEntity entidade)
-        {
-            _context.Entry(entidade).State = System.Data.Entity.EntityState.Modified;
-
-            return entidade;
-        }
-
-        public void Remover(TEntity entidade)
-        {
-            _context.Set<TEntity>().Remove(entidade);
-        }
-
-        /// <summary>
-        /// Adicionar um coleção de entidades ao contexto do entity framework
-        /// </summary>
-        /// <param name="entidades">Lista de entidades que deverão ser persistidas</param>
-        /// <returns></returns>
-        public IEnumerable<TEntity> AdicionarLista(IEnumerable<TEntity> entidades)
-        {
-            return _context.Set<TEntity>().AddRange(entidades);
-        }
-
-        /// <summary>
-        /// Verifica se existe algum objeto com a condição informada
-        /// </summary>
-        /// <param name="where"></param>
-        /// <returns></returns>
-        public bool Existe(Func<TEntity, bool> where)
-        {
-            return _context.Set<TEntity>().Any(where);
-        }
-
-        /// <summary>
-        /// Realiza include populando o objeto passado por parametro
-        /// </summary>
-        /// <param name="query">Informe o objeto do tipo IQuerable</param>
-        /// <param name="includeProperties">Ínforme o array de expressões que deseja incluir</param>
-        /// <returns></returns>
-        private IQueryable<TEntity> Include(IQueryable<TEntity> query, params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            foreach (var property in includeProperties)
-            {
-                query = query.Include(property);
-            }
-
-            return query;
+            throw new NotImplementedException();
         }
     }
 }
