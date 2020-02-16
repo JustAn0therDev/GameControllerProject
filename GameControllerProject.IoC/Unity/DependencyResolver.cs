@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using Unity;
 using Unity.Lifetime;
-using Microsoft.Practices.Unity;
 using prmToolkit.NotificationPattern;
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Repositories.Base;

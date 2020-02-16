@@ -1,5 +1,4 @@
 ﻿using GameControllerProject.Domain.Entities;
-using GameControllerProject.Infra.Persistence.Mapping;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 

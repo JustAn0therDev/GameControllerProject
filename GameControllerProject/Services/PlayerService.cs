@@ -6,7 +6,6 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
-using System;
 using System.Linq;
 
 namespace GameControllerProject.Domain.Services
@@ -41,7 +40,7 @@ namespace GameControllerProject.Domain.Services
             Player player = new Player(name, email, password);
 
             if (IsInvalid())
-                return null;
+                return null; 
 
             player = _playerRepository.Add(player);
 
@@ -107,9 +106,13 @@ namespace GameControllerProject.Domain.Services
             return (ListAllPlayersResponse)_playerRepository.GetAll().ToList();
         }
 
-        public ResponseBase DeletePlayer(Guid Id)
+        public ResponseBase DeletePlayer(DeletePlayerRequest deletePlayerRequest)
         {
-            return (ResponseBase)_playerRepository.Delete(Id);
+            _playerRepository.Delete(deletePlayerRequest.Player);
+            return new ResponseBase
+            {
+                Message = "Player successfully deleted."
+            };
         }
 
         #endregion

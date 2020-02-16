@@ -3,7 +3,6 @@ using GameControllerProject.Domain.Enums;
 using GameControllerProject.Domain.Extensions;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
-using System;
 
 namespace GameControllerProject.Domain.Entities
 {

@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameControllerProject.Domain", "GameControllerProject\GameControllerProject.Domain.csproj", "{14FEBB94-6638-4334-8F85-F7F81413F603}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControllerProject.AppConsole", "GameControllerProject.AppConsole\GameControllerProject.AppConsole.csproj", "{D29417C9-002E-4B1F-A4C9-8C3D347F1075}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControllerProject.Infra", "GameControllerProject.Infra\GameControllerProject.Infra.csproj", "{E43692CB-A0B8-4EA6-9196-34BD1A36D6BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControllerProject.IoC", "GameControllerProject.IoC\GameControllerProject.IoC.csproj", "{47B81FFA-4B9F-4F81-895E-E1A90FC0E3DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControllerProject.API", "GameControllerProject.API\GameControllerProject.API.csproj", "{645E84D2-DA5B-4B31-81EB-C8BA4A0EDEE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{14FEBB94-6638-4334-8F85-F7F81413F603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14FEBB94-6638-4334-8F85-F7F81413F603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14FEBB94-6638-4334-8F85-F7F81413F603}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D29417C9-002E-4B1F-A4C9-8C3D347F1075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D29417C9-002E-4B1F-A4C9-8C3D347F1075}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D29417C9-002E-4B1F-A4C9-8C3D347F1075}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D29417C9-002E-4B1F-A4C9-8C3D347F1075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E43692CB-A0B8-4EA6-9196-34BD1A36D6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E43692CB-A0B8-4EA6-9196-34BD1A36D6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E43692CB-A0B8-4EA6-9196-34BD1A36D6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{47B81FFA-4B9F-4F81-895E-E1A90FC0E3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B81FFA-4B9F-4F81-895E-E1A90FC0E3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B81FFA-4B9F-4F81-895E-E1A90FC0E3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645E84D2-DA5B-4B31-81EB-C8BA4A0EDEE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645E84D2-DA5B-4B31-81EB-C8BA4A0EDEE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645E84D2-DA5B-4B31-81EB-C8BA4A0EDEE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645E84D2-DA5B-4B31-81EB-C8BA4A0EDEE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
