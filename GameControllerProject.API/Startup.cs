@@ -8,7 +8,7 @@ using System;
 using System.Net.Http.Extensions.Compression.Core.Compressors;
 using System.Web.Http;
 using GameControllerProject.IoC.Unity;
-using Unity;
+using Microsoft.Practices.Unity;
 using GameControllerProject.Api.Security;
 
 namespace GameControllerProject.Api

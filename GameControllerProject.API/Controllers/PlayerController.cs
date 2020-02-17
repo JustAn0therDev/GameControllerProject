@@ -19,6 +19,21 @@ namespace GameControllerProject.API.Controllers
             _playerService = playerService;
         }
 
+        [HttpGet]
+        [Route("GetAllPlayers")]
+        public async Task<HttpResponseMessage> GetAllPlayers()
+        {
+            try
+            {
+                var response = _playerService.ListAllPlayers();
+                return await ResponseAsync(response, _playerService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
+
         [HttpPost]
         [Route("AddPlayer")]
         public async Task<HttpResponseMessage> AddPlayer(AddPlayerRequest request)

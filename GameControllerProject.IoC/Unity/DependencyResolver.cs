@@ -1,7 +1,6 @@
-﻿using System.Data.Entity;
-using Unity;
-using Unity.Lifetime;
+﻿using Unity;
 using prmToolkit.NotificationPattern;
+using System.Data.Entity;
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Repositories.Base;
 using GameControllerProject.Domain.Interfaces.Services;
@@ -10,12 +9,13 @@ using GameControllerProject.Infra.Persistence;
 using GameControllerProject.Infra.Persistence.Repositories;
 using GameControllerProject.Infra.Persistence.Repositories.Base;
 using GameControllerProject.Infra.Transactions;
+using Microsoft.Practices.Unity;
 
 namespace GameControllerProject.IoC.Unity
 {
     public static class DependencyResolver
     {
-        public static void Resolve(UnityContainer container)
+        public static void Resolve(Microsoft.Practices.Unity.UnityContainer container)
         {
 
             container.RegisterType<DbContext, GameControllerProjectContext>(new HierarchicalLifetimeManager());
@@ -27,11 +27,18 @@ namespace GameControllerProject.IoC.Unity
             //container.RegisterType(typeof(IServiceBase<,>), typeof(ServiceBase<,>));
 
             container.RegisterType<IPlayerService, PlayerService>(new HierarchicalLifetimeManager());
+            //container.RegisterType<, ServiceJogo>(new HierarchicalLifetimeManager());
+
+
 
             //Repository
             container.RegisterType(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
 
             container.RegisterType<IPlayerRepository, PlayerRepository>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IRepositoryJogo, RepositoryJogo>(new HierarchicalLifetimeManager());
+
+
+
         }
     }
 }

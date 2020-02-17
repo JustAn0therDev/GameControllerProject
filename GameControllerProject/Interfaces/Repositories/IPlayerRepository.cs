@@ -1,9 +1,6 @@
-﻿using System;
-using GameControllerProject.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using GameControllerProject.Domain.Entities;
 using GameControllerProject.Domain.Interfaces.Repositories.Base;
+using System;
 
 namespace GameControllerProject.Domain.Interfaces.Repositories
 {

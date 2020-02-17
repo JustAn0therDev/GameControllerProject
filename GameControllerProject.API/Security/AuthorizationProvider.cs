@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GameControllerProject.Domain.Arguments.Player;
 using GameControllerProject.Domain.Interfaces.Services;
-using Unity;
+using Microsoft.Practices.Unity;
 using prmToolkit.NotificationPattern;
 
 namespace GameControllerProject.Api.Security

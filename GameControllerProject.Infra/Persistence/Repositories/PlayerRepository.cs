@@ -16,19 +16,11 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             _context = context;
         }
 
-        public Player AddPlayer(Player playerToBeAdded)
+        public Player Add(Player playerToBeAdded)
         {
             try
             {
-                using (var db = _context)
-                {
-                    var result = db.Players.Add(playerToBeAdded);
-
-                    if (result != null)
-                        db.SaveChanges();
-
-                    return result;
-                }
+                return _context.Players.Add(playerToBeAdded);
             }
             catch
             {
@@ -48,12 +40,12 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             }
         }
 
-        public List<Player> GetAllPlayers()
+        public IQueryable<Player> GetAll()
         {
             try
             {
-                //Habilita paralelismo na query. Útil para queries maiores e mais complexas.
-                return _context.Players.AsParallel().ToList();
+                var result = _context.Players.AsQueryable();
+                return result;
             }
             catch
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
-using Unity;
+using Microsoft.Practices.Unity;
 
 namespace GameControllerProject.IoC.Unity
 {
