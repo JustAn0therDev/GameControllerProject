@@ -12,6 +12,11 @@ namespace GameControllerProject.Domain.ValueObjects
 
         #region Constructors
 
+        public Email()
+        {
+
+        }
+
         public Email (string address)
         {
             Address = address;

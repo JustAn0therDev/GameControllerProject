@@ -19,6 +19,11 @@ namespace GameControllerProject.Domain.Entities
 
         #region Constructors 
 
+        public Player()
+        {
+
+        }
+
         public Player(Email email, string password) : base()
         {
             Email = email;
