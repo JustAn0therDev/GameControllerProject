@@ -68,9 +68,14 @@ namespace GameControllerProject.Domain.Services
 
             player = _playerRepository.GetByEmailAndEncryptedPassword(player.Email.Address, player.Password);
 
-            if(player == null)
+            if (player == null)
             {
-                throw new ArgumentException("Authentication failed. Incorrect e-mail and/or password.");
+                return new AuthenticatePlayerResponse
+                {
+                    Email = authenticatePlayerRequest.Email,
+                    FirstName = string.Empty,
+                    Message = "Incorrect e-mail and/or password."
+                };
             }
 
             return (AuthenticatePlayerResponse)player;
