@@ -10,13 +10,13 @@ namespace GameControllerProject.Domain.Arguments.Player
         public List<Entities.Player> Players { get; set; }
         public string Message { get; set; }
 
-        //public static explicit operator ListAllPlayersResponse(List<Entities.Player> players)
-        //{
-        //    return new ListAllPlayersResponse()
-        //    {
-        //        Players = players,
-        //        Message = "Player found successfully"
-        //    };
-        //}
+        public static explicit operator ListAllPlayersResponse(List<Entities.Player> players)
+        {
+            return new ListAllPlayersResponse()
+            {
+                Players = players,
+                Message = "Player found successfully"
+            };
+        }
     }
 }

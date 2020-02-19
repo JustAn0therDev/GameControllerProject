@@ -34,7 +34,7 @@ namespace GameControllerProject.Domain.Services
         public AddPlayerResponse AddPlayer(AddPlayerRequest addPlayerRequest)
         {
             AddPlayerResponse response = new AddPlayerResponse();
-            Name name = new Name(addPlayerRequest.Name.FirstName, addPlayerRequest.Name.LastName);
+            Name name = new Name(addPlayerRequest.FirstName, addPlayerRequest.LastName);
             Email email = new Email(addPlayerRequest.Email);
             string password = addPlayerRequest.Password;
 
