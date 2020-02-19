@@ -65,6 +65,13 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             }
         }
 
+        public Player GetByEmailAndEncryptedPassword(string email, string password)
+        {
+            return _context.Players
+                .Where(w => w.Email.Address == email && w.Password == password)
+                .FirstOrDefault();
+        }
+
         public void ModifyPlayer(Player playerToBeModified)
         {
             try

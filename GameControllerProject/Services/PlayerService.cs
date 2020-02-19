@@ -6,6 +6,7 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using GameControllerProject.Domain.ValueObjects;
 using prmToolkit.NotificationPattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,10 +66,12 @@ namespace GameControllerProject.Domain.Services
             if (IsInvalid())
                 return null;
 
-            player = _playerRepository
-                .GetBy(x => x.Email.Address == authenticatePlayerRequest.Email,
-                       x => x.Password == authenticatePlayerRequest.Password)
-                .FirstOrDefault();
+            player = _playerRepository.GetByEmailAndEncryptedPassword(player.Email.Address, player.Password);
+
+            if(player == null)
+            {
+                throw new ArgumentException("Authentication failed. Incorrect e-mail and/or password.");
+            }
 
             return (AuthenticatePlayerResponse)player;
         }

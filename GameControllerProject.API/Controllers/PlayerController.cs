@@ -49,5 +49,20 @@ namespace GameControllerProject.API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("AuthenticatePlayer")]
+        public async Task<HttpResponseMessage> AuthenticatePlayer(AuthenticatePlayerRequest request)
+        {
+            try
+            {
+                var response = _playerService.Authenticate(request);
+                return await ResponseAsync(response, _playerService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
+
     }
 }
