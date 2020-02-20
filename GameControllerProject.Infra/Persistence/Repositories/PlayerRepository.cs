@@ -18,76 +18,35 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         public new Player Add(Player playerToBeAdded)
         {
-            try
-            {
-                return _context.Players.Add(playerToBeAdded);
-            }
-            catch
-            {
-                throw;
-            }
+            return _context.Players.Add(playerToBeAdded);
         }
 
         public Player Authenticate(string email, string password)
         {
-            try
-            {
-                return _context.Players.Find(email, password);
-            }
-            catch
-            {
-                throw;
-            }
+            return _context.Players.Find(email, password);
         }
 
         public new IQueryable<Player> GetAll()
         {
-            try
-            {
-                var result = _context.Players.AsQueryable();
-                return result;
-            }
-            catch
-            {
-                throw;
-            }
+            return _context.Players.AsQueryable();
         }
 
-        public Player GetByEmail(string email) 
+        public Player GetByEmail(string email)
         {
-            try
-            {
-                return _context.Players.Where(w => w.Email.Address == email).FirstOrDefault();
-            }
-            catch 
-            {
-                throw;
-            }
+
+            return _context.Players.Where(w => w.Email.Address == email).FirstOrDefault();
+
         }
 
         public new void Delete(Player player)
         {
-            try
-            {
-                _context.Players.Remove(player);
-                _context.SaveChanges();
-            }
-            catch 
-            {
-                throw;
-            }
+            _context.Players.Remove(player);
+            _context.SaveChanges();
         }
 
         public Player GetPlayerById(Guid id)
         {
-            try
-            {
-                return _context.Players.Find(id);
-            }
-            catch
-            {
-                throw;
-            }
+            return _context.Players.Find(id);
         }
 
         public Player GetByEmailAndEncryptedPassword(string email, string password)
@@ -99,21 +58,11 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         public void ModifyPlayer(Player playerToBeModified)
         {
-            try
+            var result = _context.Players.Find(playerToBeModified.Id);
+            if (result != null)
             {
-                using (var db = new GameControllerProjectContext())
-                {
-                    var result = db.Players.Find(playerToBeModified.Id);
-                    if (result != null)
-                    {
-                        result = playerToBeModified;
-                        db.SaveChanges();
-                    }
-                }
-            }
-            catch
-            {
-                throw;
+                result = playerToBeModified;
+                _context.SaveChanges();
             }
         }
     }
