@@ -16,7 +16,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             _context = context;
         }
 
-        public Player Add(Player playerToBeAdded)
+        public new Player Add(Player playerToBeAdded)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             }
         }
 
-        public IQueryable<Player> GetAll()
+        public new IQueryable<Player> GetAll()
         {
             try
             {
@@ -48,6 +48,31 @@ namespace GameControllerProject.Infra.Persistence.Repositories
                 return result;
             }
             catch
+            {
+                throw;
+            }
+        }
+
+        public Player GetByEmail(string email) 
+        {
+            try
+            {
+                return _context.Players.Where(w => w.Email.Address == email).FirstOrDefault();
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+
+        public new void Delete(Player player)
+        {
+            try
+            {
+                _context.Players.Remove(player);
+                _context.SaveChanges();
+            }
+            catch 
             {
                 throw;
             }

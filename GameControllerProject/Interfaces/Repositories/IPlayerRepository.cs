@@ -6,6 +6,7 @@ namespace GameControllerProject.Domain.Interfaces.Repositories
 {
     public interface IPlayerRepository : IRepositoryBase<Player, Guid>
     {
+        Player GetByEmail(string email);
         Player GetByEmailAndEncryptedPassword(string email, string password);
     }
 }

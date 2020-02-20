@@ -125,11 +125,19 @@ namespace GameControllerProject.Domain.Services
 
         public ResponseBase DeletePlayer(DeletePlayerRequest deletePlayerRequest)
         {
-            _playerRepository.Delete(deletePlayerRequest.Player);
-            return new ResponseBase
-            {
-                Message = "Player successfully deleted."
-            };
+            var player = _playerRepository.GetByEmail(deletePlayerRequest.Email);
+
+            if (player == null)
+                throw new NullReferenceException("Player not found.");
+            else
+                AddNotifications(player.Name, player.Email, player);
+
+            if (IsInvalid())
+                return null;
+
+            _playerRepository.Delete(player);
+
+            return (ResponseBase)player;
         }
 
         #endregion

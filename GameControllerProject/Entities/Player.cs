@@ -53,6 +53,22 @@ namespace GameControllerProject.Domain.Entities
             AddNotifications(Name, Email);
         }
 
+        public Player(Name name, Email email, string password, int status) : base()
+        {
+            Name = name;
+            Email = email;
+            Password = password;
+            Status = (PlayerStatus)status;
+
+            new AddNotifications<Player>(this)
+                .IfNullOrInvalidLength(x => x.Password, 6, 30, "A password must be provided and have between 6 and 30 characters.");
+
+            if (IsValid())
+                Password = password.ConvertToMD5();
+
+            AddNotifications(Name, Email);
+        }
+
         #endregion
 
         #region Public Methods 
