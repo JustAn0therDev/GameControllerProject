@@ -84,9 +84,6 @@ namespace GameControllerProject.Domain.Entities
             Email = email;
             Status = status;
 
-            new AddNotifications<Player>(this)
-                .IfFalse(Status == PlayerStatus.Active, "The player needs to be active to be modified.");
-
             AddNotifications(Name, Email);
         }
 

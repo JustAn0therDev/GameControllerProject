@@ -79,5 +79,20 @@ namespace GameControllerProject.API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("ModifyPlayer")]
+        public async Task<HttpResponseMessage> ModifyPlayer(ModifyPlayerRequest request)
+        {
+            try
+            {
+                var response = _playerService.ModifyPlayer(request);
+                return await ResponseAsync(response, _playerService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
+
     }
 }

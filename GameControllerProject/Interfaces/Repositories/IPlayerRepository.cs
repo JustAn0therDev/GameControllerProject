@@ -8,5 +8,6 @@ namespace GameControllerProject.Domain.Interfaces.Repositories
     {
         Player GetByEmail(string email);
         Player GetByEmailAndEncryptedPassword(string email, string password);
+        Player ModifyPlayer(Player player);
     }
 }

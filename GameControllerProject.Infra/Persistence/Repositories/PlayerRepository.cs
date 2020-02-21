@@ -1,15 +1,20 @@
 ﻿using GameControllerProject.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using GameControllerProject.Infra.Persistence.Repositories.Base;
 using GameControllerProject.Domain.Interfaces.Repositories;
+using GameControllerProject.Infra.Persistence.Repositories.Base;
+using System;
+using System.Linq;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
     public class PlayerRepository : RepositoryBase<Player, Guid>, IPlayerRepository
     {
+        #region Private Members
+
         private readonly new GameControllerProjectContext _context;
+
+        #endregion
+
+        #region Public Methods
 
         public PlayerRepository(GameControllerProjectContext context) : base(context)
         {
@@ -35,7 +40,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
         {
 
             return _context.Players.Where(w => w.Email.Address == email).FirstOrDefault();
-
         }
 
         public new void Delete(Player player)
@@ -56,7 +60,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
                 .FirstOrDefault();
         }
 
-        public void ModifyPlayer(Player playerToBeModified)
+        public Player ModifyPlayer(Player playerToBeModified)
         {
             var result = _context.Players.Find(playerToBeModified.Id);
             if (result != null)
@@ -64,6 +68,9 @@ namespace GameControllerProject.Infra.Persistence.Repositories
                 result = playerToBeModified;
                 _context.SaveChanges();
             }
+            return result; 
         }
+
+        #endregion
     }
 }

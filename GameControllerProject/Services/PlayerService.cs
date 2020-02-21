@@ -100,14 +100,14 @@ namespace GameControllerProject.Domain.Services
             var name = new Name(modifyPlayerRequest.FirstName, modifyPlayerRequest.LastName);
             var email = new Email(modifyPlayerRequest.Email);
 
-            player.ModifyPlayer(name, email, (PlayerStatus)modifyPlayerRequest.Status);
+            player.ModifyPlayer(name, email, player.Status);
 
             AddNotifications(player);
 
             if (IsInvalid())
                 return null;
 
-            _playerRepository.Update(player);
+            _playerRepository.ModifyPlayer(player);
 
             return (ModifyPlayerResponse)player;
         }
