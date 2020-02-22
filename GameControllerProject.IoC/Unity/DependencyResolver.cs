@@ -27,7 +27,7 @@ namespace GameControllerProject.IoC.Unity
             //container.RegisterType(typeof(IServiceBase<,>), typeof(ServiceBase<,>));
 
             container.RegisterType<IPlayerService, PlayerService>(new HierarchicalLifetimeManager());
-            //container.RegisterType<, ServiceJogo>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGameService, GameService>(new HierarchicalLifetimeManager());
 
 
 
@@ -35,7 +35,7 @@ namespace GameControllerProject.IoC.Unity
             container.RegisterType(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
 
             container.RegisterType<IPlayerRepository, PlayerRepository>(new HierarchicalLifetimeManager());
-            //container.RegisterType<IRepositoryJogo, RepositoryJogo>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGameRepository, GameRepository>(new HierarchicalLifetimeManager());
 
 
 
