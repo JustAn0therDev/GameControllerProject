@@ -10,13 +10,13 @@ namespace GameControllerProject.Domain.Interfaces.Services
     public interface IGameService : IServiceBase 
     {
         AddGameResponse AddGame(AddGameRequest request);
-        Game ModifyGame(Game game);
-        void Delete(Game game);
+        ModifyGameResponse ModifyGame(ModifyGameRequest request);
+        DeleteGameResponse Delete(Game game);
         GetAllGamesResponse GetAllGames();
         Game GetById(Game game);
         Game GetByName(string name);
-        List<Game> GetGamesByProductor(string productor);
-        List<Game> GetGamesByPublisher(string publisher);
-        List<Game> GetGamesByGenre(string genre);
+        GetGameResponse GetGamesByProductor(string productor);
+        GetGameResponse GetGamesByPublisher(string publisher);
+        GetGameResponse GetGamesByGenre(string genre);
     }
 }

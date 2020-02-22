@@ -12,7 +12,7 @@ namespace GameControllerProject.Domain.Services
     {
         #region Private Members
 
-        private readonly IGameRepository _gameService;
+        private readonly IGameRepository _gameRepository;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace GameControllerProject.Domain.Services
 
         public GameService(IGameRepository gameService)
         {
-            _gameService = gameService;
+            _gameRepository = gameService;
         }
 
         #endregion
@@ -29,76 +29,109 @@ namespace GameControllerProject.Domain.Services
 
         public AddGameResponse AddGame(AddGameRequest request)
         {
-            try
-            {
-                var game = new Game(request.Name, request.Productor, request.Publisher, request.Genre);
+            var game = new Game(request.Name, request.Productor, request.Publisher, request.Genre);
 
-                if (IsInvalid())
-                    return null;
+            if (IsInvalid())
+                return null;
 
-                var result = _gameService.AddGame(game);
+            var result = _gameRepository.AddGame(game);
 
-                if (result == null)
-                    throw new NullReferenceException("The game could not be added.");
+            if (result == null)
+                throw new NullReferenceException("The game could not be added.");
 
-                return (AddGameResponse)result;
-            }
-            catch
-            {
-                throw;
-            }
+            return (AddGameResponse)result;
         }
 
-        public void Delete(Game game)
+        public DeleteGameResponse Delete(Game game)
         {
-            throw new NotImplementedException();
+            _gameRepository.Delete(game);
+
+            return new DeleteGameResponse { Success = true, Message = "Game successfully deleted" };
         }
 
         public GetAllGamesResponse GetAllGames()
         {
-            try
-            {
-                List<Game> games = _gameService.GetAllGames();
+            List<Game> games = _gameRepository.GetAllGames();
 
-                if (games == null || games.Count == 0)
-                    throw new NullReferenceException("No game has been found on the database.");
+            if (games == null || games.Count == 0)
+                throw new NullReferenceException("No game has been found on the database.");
 
-                return (GetAllGamesResponse)games;
-            }
-            catch 
-            {
-                throw;
-            }
+            return (GetAllGamesResponse)games;
         }
 
         public Game GetById(Game game)
         {
-            throw new NotImplementedException();
+            Game result = _gameRepository.GetById(game.Id);
+
+            if (result == null)
+                throw new NullReferenceException("Game not found");
+
+            return result;
         }
 
         public Game GetByName(string name)
         {
-            throw new NotImplementedException();
+            var game = _gameRepository.GetByName(name);
+
+            if (game == null)
+                throw new NullReferenceException("Game not found");
+
+            return game;
         }
 
-        public List<Game> GetGamesByGenre(string genre)
+        public GetGameResponse GetGamesByGenre(string genre)
         {
-            throw new NotImplementedException();
+            var games = _gameRepository.GetGamesByGenre(genre);
+
+            if (games == null || games.Count == 0)
+                throw new NullReferenceException("No games were found for the provided genre.");
+
+            return (GetGameResponse)games;
         }
 
-        public List<Game> GetGamesByProductor(string productor)
+        public GetGameResponse GetGamesByProductor(string productor)
         {
-            throw new NotImplementedException();
+            var games = _gameRepository.GetGamesByProductor(productor);
+
+            if (games == null || games.Count == 0)
+                throw new NullReferenceException("No games were found for the provided genre.");
+
+            return (GetGameResponse)games;
         }
 
-        public List<Game> GetGamesByPublisher(string publisher)
+        public GetGameResponse GetGamesByPublisher(string publisher)
         {
-            throw new NotImplementedException();
+            var games = _gameRepository.GetGamesByPublisher(publisher);
+
+            if (games == null || games.Count == 0)
+                throw new NullReferenceException("No games were found for the provided genre.");
+
+            return (GetGameResponse)games;
         }
 
-        public Game ModifyGame(Game game)
+        public ModifyGameResponse ModifyGame(ModifyGameRequest request)
         {
-            throw new NotImplementedException();
+            var game = new Game(
+                request.Id
+                , request.Name
+                , request.Description
+                , request.Productor
+                , request.Publisher
+                , request.Genre
+                , request.Website
+                );
+
+            AddNotifications(game);
+
+            if (IsInvalid())
+                return null;
+
+            game = _gameRepository.Update(game);
+
+            if (game == null)
+                throw new NullReferenceException("The provided game could not be updated.");
+
+            return (ModifyGameResponse)game;
         }
 
         #endregion

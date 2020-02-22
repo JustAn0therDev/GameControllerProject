@@ -34,7 +34,7 @@ namespace GameControllerProject.Domain.Entities
             new AddNotifications<Game>(this).IfNullOrEmpty(x => x.Name, "A game must at least have a name.");
         }
 
-        public Game(string name, string description, string productor, string publisher, string genre, string website)
+        public Game(string name, string description, string productor, string publisher, string genre, string website) : base()
         {
             Name = name;
             Description = description;
@@ -56,7 +56,6 @@ namespace GameControllerProject.Domain.Entities
             Genre = genre;
             Website = website;
 
-            new AddNotifications<Game>(this).IfNull(x => x.Id, "Game not found.");
             new AddNotifications<Game>(this).IfNullOrEmpty(x => x.Name, "A game must at least have a name.");
         }
 

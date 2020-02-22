@@ -44,7 +44,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         public new void Delete(Game entity)
         {
-            throw new NotImplementedException();
+            _context.Games.Remove(entity);
         }
 
         public new bool Exists(Func<Game, bool> func)
@@ -72,9 +72,29 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public new Game GetById(Guid id)
+        public Game GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Games.Find(id);
+        }
+
+        public Game GetByName(string name)
+        {
+            return _context.Games.Find(name);
+        }
+
+        public List<Game> GetGamesByGenre(string genre)
+        {
+            return _context.Games.Where(w => w.Genre.ToLower() == genre.ToLower()).ToList();
+        }
+
+        public List<Game> GetGamesByProductor(string productor)
+        {
+            return _context.Games.Where(w => w.Productor.ToLower() == productor.ToLower()).ToList();
+        }
+
+        public List<Game> GetGamesByPublisher(string publisher)
+        {
+            return _context.Games.Where(w => w.Publisher.ToLower() == publisher.ToLower()).ToList();
         }
 
         public IQueryable<Game> GetOrderedBy<TKey>(Expression<Func<Game, TKey>> order, bool ascending)
@@ -82,9 +102,13 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Game Update(Game entity)
+        public new Game Update(Game entity)
         {
-            throw new NotImplementedException();
+            var game = _context.Games.Find(entity.Id);
+            game = entity;
+            _context.SaveChanges();
+
+            return game;
         }
     }
 }
