@@ -11,7 +11,7 @@ namespace GameControllerProject.Domain.Interfaces.Services
     {
         AddGameResponse AddGame(AddGameRequest request);
         ModifyGameResponse ModifyGame(ModifyGameRequest request);
-        DeleteGameResponse Delete(Game game);
+        DeleteGameResponse DeleteGame(DeleteGameRequest request);
         GetAllGamesResponse GetAllGames();
         Game GetById(Game game);
         Game GetByName(string name);

@@ -9,6 +9,7 @@ namespace GameControllerProject.Domain.Interfaces.Repositories
     {
         Game AddGame(Game game);
         List<Game> GetAllGames();
+        void Delete(Guid Id);
         Game GetByName(string name);
         List<Game> GetGamesByGenre(string genre);
         List<Game> GetGamesByProductor(string productor);

@@ -42,9 +42,10 @@ namespace GameControllerProject.Domain.Services
             return (AddGameResponse)result;
         }
 
-        public DeleteGameResponse Delete(Game game)
+        public DeleteGameResponse DeleteGame(DeleteGameRequest request)
         {
-            _gameRepository.Delete(game);
+
+            _gameRepository.Delete(request.Id);
 
             return new DeleteGameResponse { Success = true, Message = "Game successfully deleted" };
         }

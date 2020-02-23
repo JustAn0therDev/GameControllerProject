@@ -42,9 +42,11 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public new void Delete(Game entity)
+        public void Delete(Guid Id)
         {
-            _context.Games.Remove(entity);
+            var result = _context.Games.Find(Id);
+            _context.Games.Remove(result);
+            _context.SaveChanges();
         }
 
         public new bool Exists(Func<Game, bool> func)

@@ -92,5 +92,20 @@ namespace GameControllerProject.API.Controllers
                 return await ResponseExceptionAsync(ex);
             }
         }
+
+        [HttpPost]
+        [Route("DeleteGame")]
+        public async Task<HttpResponseMessage> DeleteGame(DeleteGameRequest request)
+        {
+            try
+            {
+                var response = _gameService.DeleteGame(request);
+                return await ResponseAsync(response, _gameService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
     }
 }
