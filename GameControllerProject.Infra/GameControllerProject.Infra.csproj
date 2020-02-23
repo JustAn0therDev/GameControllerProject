@@ -259,12 +259,18 @@
     <Compile Include="Migrations\202002170144158_CreatingDatabase1.designer.cs">
       <DependentUpon>202002170144158_CreatingDatabase1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002230432036_MappingGamePlatform.cs" />
+    <Compile Include="Migrations\202002230432036_MappingGamePlatform.designer.cs">
+      <DependentUpon>202002230432036_MappingGamePlatform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GameControllerProjectContext.cs" />
+    <Compile Include="Persistence\Mapping\GamePlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlayerMap.cs" />
     <Compile Include="Persistence\Repositories\Base\RepositoryBase.cs" />
     <Compile Include="Persistence\Repositories\GameRepository.cs" />
+    <Compile Include="Persistence\Repositories\PlatformRepository.cs" />
     <Compile Include="Persistence\Repositories\PlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions\IUnitOfWork.cs" />
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002170144158_CreatingDatabase1.resx">
       <DependentUpon>202002170144158_CreatingDatabase1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002230432036_MappingGamePlatform.resx">
+      <DependentUpon>202002230432036_MappingGamePlatform.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,6 +15,7 @@ namespace GameControllerProject.Infra.Persistence
         public IDbSet<Player> Players { get; set; }
         public IDbSet<Game> Games { get; set; }
         public IDbSet<Platform> Platforms { get; set; }
+        public IDbSet<GamePlatform> GamePlatforms { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

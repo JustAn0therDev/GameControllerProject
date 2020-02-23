@@ -1,23 +1,29 @@
-﻿using prmToolkit.NotificationPattern;
+﻿using GameControllerProject.Domain.Entities.Base;
 using System;
 
 namespace GameControllerProject.Domain.Entities
 {
-    public class Platform : Notifiable
+    public class Platform : EntityBase
     {
         #region Public Members
-
-        public Guid Id { get; set; }
         public string Name { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Platform(string name)
+        public Platform()
+        {
+
+        }
+        public Platform(string name) : base()
         {
             Name = name;
-            new AddNotifications<Platform>(this).IfNullOrEmpty(x => x.Name, "A platform must have a name.");
+        }
+        public Platform(Guid id, string name)
+        {
+            Id = id;
+            Name = name;
         }
 
         #endregion

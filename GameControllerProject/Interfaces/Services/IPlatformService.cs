@@ -1,11 +1,9 @@
 ﻿using GameControllerProject.Domain.Arguments.Platform;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using GameControllerProject.Domain.Interfaces.Services.Base;
 
 namespace GameControllerProject.Domain.Interfaces.Services
 {
-    public interface IPlatformService
+    public interface IPlatformService : IServiceBase
     {
         AddPlatformResponse AddPlatForm(AddPlatformRequest addPlatformRequest);
     }

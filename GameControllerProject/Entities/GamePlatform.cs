@@ -1,16 +1,30 @@
 ﻿using System;
+using GameControllerProject.Domain.Entities.Base;
 
 namespace GameControllerProject.Domain.Entities
 {
-    public class GamePlatform
+    public class GamePlatform : EntityBase
     {
         #region Public Members
 
-        public Guid Id { get; set; }
-        public Game Game { get; set; }
-        public Platform Platform { get; set; }
-        public DateTime LaunchDate { get; set; }
+        public Guid GameId { get; set; }
+        public Guid PlatformId { get; set; }
 
-        #endregion 
+        #endregion
+
+        #region Constructors 
+
+        public GamePlatform()
+        {
+
+        }
+
+        public GamePlatform(Guid gameId, Guid platformId)
+        {
+            GameId = gameId;
+            PlatformId = platformId;
+        }
+
+        #endregion
     }
 }

@@ -1,20 +1,25 @@
 ﻿using GameControllerProject.Domain.Arguments.Platform;
 using GameControllerProject.Domain.Entities;
+using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
+using prmToolkit.NotificationPattern;
+using System;
 
 namespace GameControllerProject.Domain.Services
 {
-    class PlatformService : IPlatformService
+    public class PlatformService : Notifiable, IPlatformService
     {
         #region Private Members
-        private readonly IPlatformService _platformService;
+
+        private readonly IPlatformRepository _platformRepository;
+
         #endregion
 
         #region Constructors 
 
-        public PlatformService(IPlatformService platformService)
+        public PlatformService(IPlatformRepository platformRepository)
         {
-            _platformService = platformService;
+            _platformRepository = platformRepository;
         }
 
         #endregion
@@ -23,9 +28,18 @@ namespace GameControllerProject.Domain.Services
         {
             Platform platform = new Platform(addPlatformRequest.PlatformName);
 
-            AddPlatformResponse response = _platformService.AddPlatForm(addPlatformRequest);
+            AddNotifications(platform);
 
-            return response;
+            if (IsInvalid())
+                return null;
+
+            var result = _platformRepository.AddPlatform(platform);
+
+
+            if (result == null)
+                throw new NullReferenceException("Platform could not be added");
+
+            return (AddPlatformResponse)result;
         }
     }
 }

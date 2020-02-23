@@ -28,14 +28,14 @@ namespace GameControllerProject.IoC.Unity
 
             container.RegisterType<IPlayerService, PlayerService>(new HierarchicalLifetimeManager());
             container.RegisterType<IGameService, GameService>(new HierarchicalLifetimeManager());
-
-
+            container.RegisterType<IPlatformService, PlatformService>(new HierarchicalLifetimeManager());
 
             //Repository
             container.RegisterType(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
 
             container.RegisterType<IPlayerRepository, PlayerRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGameRepository, GameRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IPlatformRepository, PlatformRepository>(new HierarchicalLifetimeManager());
 
 
 

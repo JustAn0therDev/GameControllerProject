@@ -1,10 +1,7 @@
 ﻿using GameControllerProject.Domain.Entities.Base;
 using GameControllerProject.Domain.Interfaces.Repositories.Base;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace GameControllerProject.Infra.Persistence.Repositories.Base
 {
