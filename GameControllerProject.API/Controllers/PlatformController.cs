@@ -33,5 +33,20 @@ namespace GameControllerProject.API.Controllers
                 return await ResponseExceptionAsync(ex);
             }
         }
+
+        [HttpGet]
+        [Route("GetAllPlatforms")]
+        public async Task<HttpResponseMessage> GetAllPlatforms()
+        {
+            try
+            {
+                var response = _platformService.GetAllPlatforms();
+                return await ResponseAsync(response, _platformService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
     }
 }

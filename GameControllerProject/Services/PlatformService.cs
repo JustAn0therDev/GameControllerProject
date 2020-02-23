@@ -4,6 +4,8 @@ using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
 using prmToolkit.NotificationPattern;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameControllerProject.Domain.Services
 {
@@ -23,6 +25,17 @@ namespace GameControllerProject.Domain.Services
         }
 
         #endregion
+
+        public GetAllPlatformsResponse GetAllPlatforms()
+        {
+            List<Platform> platforms = _platformRepository.GetAll().ToList();
+
+            if (platforms == null || platforms.Count == 0)
+                throw new NullReferenceException("Nothing was found in the platform repository");
+
+            return (GetAllPlatformsResponse)platforms;
+        }
+
 
         public AddPlatformResponse AddPlatForm(AddPlatformRequest addPlatformRequest)
         {

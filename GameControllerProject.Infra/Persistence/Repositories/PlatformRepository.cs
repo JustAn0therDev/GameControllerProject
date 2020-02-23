@@ -2,6 +2,7 @@
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Infra.Persistence.Repositories.Base;
 using System;
+using System.Linq;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
@@ -27,6 +28,11 @@ namespace GameControllerProject.Infra.Persistence.Repositories
         public Platform AddPlatform(Platform entity)
         {
             return _context.Platforms.Add(entity);
+        }
+
+        public IQueryable<Platform> GetAll()
+        {
+            return _context.Platforms.Select(s => s);
         }
 
         #endregion

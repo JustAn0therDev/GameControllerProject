@@ -6,5 +6,6 @@ namespace GameControllerProject.Domain.Interfaces.Services
     public interface IPlatformService : IServiceBase
     {
         AddPlatformResponse AddPlatForm(AddPlatformRequest addPlatformRequest);
+        GetAllPlatformsResponse GetAllPlatforms();
     }
 }
