@@ -26,11 +26,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return _context.Players.Add(playerToBeAdded);
         }
 
-        public Player Authenticate(string email, string password)
-        {
-            return _context.Players.Find(email, password);
-        }
-
         public new IQueryable<Player> GetAll()
         {
             return _context.Players.AsQueryable();

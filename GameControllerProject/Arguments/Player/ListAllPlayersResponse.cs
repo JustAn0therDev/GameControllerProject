@@ -7,8 +7,9 @@ namespace GameControllerProject.Domain.Arguments.Player
 {
     public class ListAllPlayersResponse : IResponse
     {
-        public List<Entities.Player> Players { get; set; }
+        public bool Success { get; set; }
         public string Message { get; set; }
+        public List<Entities.Player> Players { get; set; }
 
         public static explicit operator ListAllPlayersResponse(List<Entities.Player> players)
         {

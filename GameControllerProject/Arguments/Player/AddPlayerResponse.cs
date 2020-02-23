@@ -5,6 +5,7 @@ namespace GameControllerProject.Domain.Arguments.Player
 {
     public class AddPlayerResponse : IResponse
     {
+        public bool Success { get; set; }
         public Guid Id { get; set; }
         public string Message { get; set; }
 
@@ -12,6 +13,7 @@ namespace GameControllerProject.Domain.Arguments.Player
         {
             return new AddPlayerResponse()
             {
+                Success = true,
                 Id = Guid.NewGuid(),
                 Message = "Player added successfully"
             };
