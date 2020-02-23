@@ -49,29 +49,9 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             _context.SaveChanges();
         }
 
-        public new bool Exists(Func<Game, bool> func)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Game> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Game> GetAllGames()
         {
             return _context.Games.Select(s => s).ToList();
-        }
-
-        public IQueryable<Game> GetAndOrderBy<TKey>(Expression<Func<Game, bool>> where, Expression<Func<Game, TKey>> ordem, bool ascendente = true, params Expression<Func<Game, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Game> GetBy(Expression<Func<Game, bool>> where, params Expression<Func<Game, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
         }
 
         public Game GetById(Guid id)
@@ -97,11 +77,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
         public List<Game> GetGamesByPublisher(string publisher)
         {
             return _context.Games.Where(w => w.Publisher.ToLower() == publisher.ToLower()).ToList();
-        }
-
-        public IQueryable<Game> GetOrderedBy<TKey>(Expression<Func<Game, TKey>> order, bool ascending)
-        {
-            throw new NotImplementedException();
         }
 
         public new Game Update(Game entity)
