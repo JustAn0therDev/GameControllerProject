@@ -5,7 +5,6 @@ using GameControllerProject.Infra.Transactions;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace GameControllerProject.API.Controllers

@@ -4,7 +4,6 @@ using GameControllerProject.Infra.Persistence.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
@@ -12,7 +11,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
     {
         #region Private Members
 
-        private readonly GameControllerProjectContext _context;
+        private new readonly GameControllerProjectContext _context;
 
         #endregion
 
@@ -25,21 +24,11 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         #endregion
 
-        public Game Add(Game entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public Game AddGame(Game entity)
         {
             _context.Games.Add(entity);
             _context.SaveChanges();
             return entity;
-        }
-
-        public new IQueryable<Game> AddList(IEnumerable<Game> entities)
-        {
-            throw new NotImplementedException();
         }
 
         public void Delete(Guid Id)
@@ -54,7 +43,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return _context.Games.Select(s => s).ToList();
         }
 
-        public Game GetById(Guid id)
+        public new Game GetById(Guid id)
         {
             return _context.Games.Find(id);
         }
