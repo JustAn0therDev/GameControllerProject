@@ -1,6 +1,7 @@
 ﻿using GameControllerProject.Domain.Interfaces.Arguments;
-using GameControllerProject.Domain.Entities;
+using GameControllerProject.Domain.Arguments.CustomTypes;
 using System;
+using System.Collections.Generic;
 
 namespace GameControllerProject.Domain.Arguments.Game
 {
@@ -8,16 +9,6 @@ namespace GameControllerProject.Domain.Arguments.Game
     {
         public bool Success { get; set; }
         public string Message { get; set; }
-        public Entities.Game Game { get; set; }
-
-        public static explicit operator AddGameResponse(Entities.Game game)
-        {
-            return new AddGameResponse
-            {
-                Success = true,
-                Message = "Game added successfully",
-                Game = game
-            };
-        }
+        public List<GameWithPlatform> GamesWithPlatforms { get; set; }
     }
 }

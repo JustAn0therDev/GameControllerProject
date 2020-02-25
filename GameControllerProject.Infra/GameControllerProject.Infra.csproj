@@ -269,9 +269,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GameControllerProjectContext.cs" />
+    <Compile Include="Persistence\Mapping\GamePlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlayerMap.cs" />
     <Compile Include="Persistence\Repositories\Base\RepositoryBase.cs" />
+    <Compile Include="Persistence\Repositories\GamePlatformRepository.cs" />
     <Compile Include="Persistence\Repositories\GameRepository.cs" />
     <Compile Include="Persistence\Repositories\PlatformRepository.cs" />
     <Compile Include="Persistence\Repositories\PlayerRepository.cs" />

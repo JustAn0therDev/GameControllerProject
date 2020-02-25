@@ -4,7 +4,6 @@ using GameControllerProject.Infra.Persistence.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace GameControllerProject.Infra.Persistence.Repositories
 {
@@ -12,7 +11,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
     {
         #region Private Members
 
-        private readonly GameControllerProjectContext _context;
+        private new readonly GameControllerProjectContext _context;
 
         #endregion
 
@@ -25,7 +24,9 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         #endregion
 
-        public Game Add(Game entity)
+        #region Public Methods
+
+        public new Game Add(Game entity)
         {
             throw new NotImplementedException();
         }
@@ -37,11 +38,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return entity;
         }
 
-        public new IQueryable<Game> AddList(IEnumerable<Game> entities)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(Guid Id)
         {
             var result = _context.Games.Find(Id);
@@ -49,12 +45,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             _context.SaveChanges();
         }
 
-        public new bool Exists(Func<Game, bool> func)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Game> GetAll()
+        public new IQueryable<Game> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -64,17 +55,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return _context.Games.Select(s => s).ToList();
         }
 
-        public IQueryable<Game> GetAndOrderBy<TKey>(Expression<Func<Game, bool>> where, Expression<Func<Game, TKey>> ordem, bool ascendente = true, params Expression<Func<Game, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Game> GetBy(Expression<Func<Game, bool>> where, params Expression<Func<Game, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Game GetById(Guid id)
+        public new Game GetById(Guid id)
         {
             return _context.Games.Find(id);
         }
@@ -99,11 +80,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return _context.Games.Where(w => w.Publisher.ToLower() == publisher.ToLower()).ToList();
         }
 
-        public IQueryable<Game> GetOrderedBy<TKey>(Expression<Func<Game, TKey>> order, bool ascending)
-        {
-            throw new NotImplementedException();
-        }
-
         public new Game Update(Game entity)
         {
             var game = _context.Games.Find(entity.Id);
@@ -112,5 +88,7 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
             return game;
         }
+
+        #endregion
     }
 }

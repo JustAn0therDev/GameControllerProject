@@ -2,9 +2,11 @@
 using GameControllerProject.Domain.Entities;
 using GameControllerProject.Domain.Interfaces.Repositories;
 using GameControllerProject.Domain.Interfaces.Services;
+using GameControllerProject.Domain.Arguments.CustomTypes;
 using prmToolkit.NotificationPattern;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameControllerProject.Domain.Services
 {
@@ -13,14 +15,16 @@ namespace GameControllerProject.Domain.Services
         #region Private Members
 
         private readonly IGameRepository _gameRepository;
+        private readonly IGamePlatformRepository _gamePlatformRepository;
 
         #endregion
 
         #region Constructors
 
-        public GameService(IGameRepository gameService)
+        public GameService(IGameRepository gameRepository, IGamePlatformRepository gamePlatformRepository)
         {
-            _gameRepository = gameService;
+            _gameRepository = gameRepository;
+            _gamePlatformRepository = gamePlatformRepository;
         }
 
         #endregion
@@ -29,6 +33,7 @@ namespace GameControllerProject.Domain.Services
 
         public AddGameResponse AddGame(AddGameRequest request)
         {
+            var resp = new AddGameResponse();
             var game = new Game(request.Name, request.Productor, request.Publisher, request.Genre);
 
             if (IsInvalid())
@@ -39,7 +44,16 @@ namespace GameControllerProject.Domain.Services
             if (result == null)
                 throw new NullReferenceException("The game could not be added.");
 
-            return (AddGameResponse)result;
+            foreach (var platformId in request.Platforms)
+            {
+                _gamePlatformRepository.Add(new GamePlatform { GameId = result.Id, PlatformId = platformId });
+            }
+
+            resp.GamesWithPlatforms.Add(new GameWithPlatform(result, _gamePlatformRepository.GetAllPlatforms(result.Id)));
+
+            resp.Success = true;
+            resp.Message = "Game added successfully";
+            return resp;
         }
 
         public DeleteGameResponse DeleteGame(DeleteGameRequest request)
@@ -52,22 +66,40 @@ namespace GameControllerProject.Domain.Services
 
         public GetAllGamesResponse GetAllGames()
         {
+            var resp = new GetAllGamesResponse();
             List<Game> games = _gameRepository.GetAllGames();
 
             if (games == null || games.Count == 0)
                 throw new NullReferenceException("No game has been found on the database.");
 
-            return (GetAllGamesResponse)games;
+            foreach (var game in games)
+            {
+                List<Platform> platforms = new List<Platform>();
+                platforms.AddRange(_gamePlatformRepository.GetAllPlatforms(game.Id).ToList());
+
+                var gameWithPlatform = new GameWithPlatform(game, platforms);
+
+                resp.GamesWithPlatforms.Add(gameWithPlatform);
+            }
+
+            resp.Success = true;
+            resp.Message = "Games with platforms retrieved successfully";
+            return resp;
         }
 
-        public Game GetById(Game game)
+        public GameWithPlatform GetById(Game game)
         {
-            Game result = _gameRepository.GetById(game.Id);
+            Game foundGame = _gameRepository.GetById(game.Id);
 
-            if (result == null)
+            if (foundGame == null)
                 throw new NullReferenceException("Game not found");
 
-            return result;
+            GameWithPlatform resp = new GameWithPlatform(
+                foundGame
+                , _gamePlatformRepository.GetAllPlatforms(foundGame.Id)
+                );
+
+            return resp;
         }
 
         public Game GetByName(string name)

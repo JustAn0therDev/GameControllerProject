@@ -14,5 +14,6 @@ namespace GameControllerProject.Domain.Arguments.Game
         public string Publisher { get; set; }
         public string Genre { get; set; }
         public string Website { get; set; }
+        public List<Guid> Platforms { get; set; }
     }
 }

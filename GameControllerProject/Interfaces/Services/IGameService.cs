@@ -4,6 +4,7 @@ using System.Text;
 using GameControllerProject.Domain.Interfaces.Services.Base;
 using GameControllerProject.Domain.Entities;
 using GameControllerProject.Domain.Arguments.Game;
+using GameControllerProject.Domain.Arguments.CustomTypes;
 
 namespace GameControllerProject.Domain.Interfaces.Services
 {
@@ -13,7 +14,7 @@ namespace GameControllerProject.Domain.Interfaces.Services
         ModifyGameResponse ModifyGame(ModifyGameRequest request);
         DeleteGameResponse DeleteGame(DeleteGameRequest request);
         GetAllGamesResponse GetAllGames();
-        Game GetById(Game game);
+        GameWithPlatform GetById(Game game);
         Game GetByName(string name);
         GetGameResponse GetGamesByProductor(string productor);
         GetGameResponse GetGamesByPublisher(string publisher);

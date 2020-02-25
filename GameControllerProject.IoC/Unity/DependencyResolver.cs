@@ -36,6 +36,7 @@ namespace GameControllerProject.IoC.Unity
             container.RegisterType<IPlayerRepository, PlayerRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGameRepository, GameRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IPlatformRepository, PlatformRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGamePlatformRepository, GamePlatformRepository>(new HierarchicalLifetimeManager());
 
 
 
