@@ -8,5 +8,6 @@ namespace GameControllerProject.Domain.Interfaces.Repositories
     {
         Entities.GamePlatform AddGamePlatform(Guid gameId, Guid platformId);
         List<Entities.Platform> GetAllPlatforms(Guid gameId);
+        void UpdateGamePlatformsList(Guid gameId, List<Guid> platforms);
     }
 }

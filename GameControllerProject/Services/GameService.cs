@@ -115,35 +115,69 @@ namespace GameControllerProject.Domain.Services
         public GetGameResponse GetGamesByGenre(string genre)
         {
             var games = _gameRepository.GetGamesByGenre(genre);
+            var gamesWithPlatforms = new List<GameWithPlatform>();
 
             if (games == null || games.Count == 0)
                 throw new NullReferenceException("No games were found for the provided genre.");
 
-            return (GetGameResponse)games;
+            foreach (var game in games)
+            {
+                List<Platform> platforms = new List<Platform>();
+                platforms.AddRange(_gamePlatformRepository.GetAllPlatforms(game.Id).ToList());
+
+                var gameWithPlatform = new GameWithPlatform(game, platforms);
+
+                gamesWithPlatforms.Add(gameWithPlatform);
+            }
+
+            return (GetGameResponse)gamesWithPlatforms;
         }
 
         public GetGameResponse GetGamesByProductor(string productor)
         {
             var games = _gameRepository.GetGamesByProductor(productor);
+            var gamesWithPlatforms = new List<GameWithPlatform>();
 
             if (games == null || games.Count == 0)
                 throw new NullReferenceException("No games were found for the provided genre.");
 
-            return (GetGameResponse)games;
+            foreach (var game in games)
+            {
+                List<Platform> platforms = new List<Platform>();
+                platforms.AddRange(_gamePlatformRepository.GetAllPlatforms(game.Id).ToList());
+
+                var gameWithPlatform = new GameWithPlatform(game, platforms);
+
+                gamesWithPlatforms.Add(gameWithPlatform);
+            }
+
+            return (GetGameResponse)gamesWithPlatforms;
         }
 
         public GetGameResponse GetGamesByPublisher(string publisher)
         {
             var games = _gameRepository.GetGamesByPublisher(publisher);
+            var gamesWithPlatforms = new List<GameWithPlatform>();
 
             if (games == null || games.Count == 0)
                 throw new NullReferenceException("No games were found for the provided genre.");
 
-            return (GetGameResponse)games;
+            foreach (var game in games)
+            {
+                List<Platform> platforms = new List<Platform>();
+                platforms.AddRange(_gamePlatformRepository.GetAllPlatforms(game.Id).ToList());
+
+                var gameWithPlatform = new GameWithPlatform(game, platforms);
+
+                gamesWithPlatforms.Add(gameWithPlatform);
+            }
+
+            return (GetGameResponse)gamesWithPlatforms;
         }
 
         public ModifyGameResponse ModifyGame(ModifyGameRequest request)
         {
+
             var game = new Game(
                 request.Id
                 , request.Name
@@ -161,10 +195,15 @@ namespace GameControllerProject.Domain.Services
 
             game = _gameRepository.Update(game);
 
+            _gamePlatformRepository.UpdateGamePlatformsList(game.Id, request.Platforms);
+
             if (game == null)
                 throw new NullReferenceException("The provided game could not be updated.");
 
-            return (ModifyGameResponse)game;
+            var platforms = _gamePlatformRepository.GetAllPlatforms(game.Id);
+            GameWithPlatform gameWithPlatform = new GameWithPlatform(game, platforms);
+
+            return (ModifyGameResponse)gameWithPlatform;
         }
 
         #endregion

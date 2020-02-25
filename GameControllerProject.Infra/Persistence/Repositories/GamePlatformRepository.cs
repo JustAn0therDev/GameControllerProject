@@ -45,6 +45,43 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return platforms;
         }
 
+        public void UpdateGamePlatformsList(Guid gameId, List<Guid> platformIds)
+        {
+            List<Platform> platforms = new List<Platform>();
+
+            var currentData = GetAllPlatforms(gameId).AsQueryable();
+
+            if (platformIds != null && platformIds.Count > 0)
+            {
+                foreach (var platformId in platformIds)
+                {
+                    platforms.Add(_context.Platforms.Where(w => w.Id == platformId).FirstOrDefault());
+                }
+
+                List<Platform> newPlatforms = platforms.Except(currentData).ToList();
+
+                List<Platform> platformsToBeDeleted = currentData.Except(platforms).ToList();
+
+                if (platformsToBeDeleted != null && platformsToBeDeleted.Count > 0)
+                {
+                    foreach (var toDel in platformsToBeDeleted)
+                    {
+                        var platformToDelete = _context.GamePlatforms.Where(w => w.GameId == gameId && w.PlatformId == toDel.Id).FirstOrDefault();
+                        _context.GamePlatforms.Remove(platformToDelete);
+                        _context.SaveChanges();
+                    }
+                }
+
+                if (newPlatforms != null && newPlatforms.Count > 0)
+                {
+                    foreach (var platform in newPlatforms)
+                    {
+                        AddGamePlatform(gameId, platform.Id);
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 }
