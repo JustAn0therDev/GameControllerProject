@@ -263,9 +263,12 @@
     <Compile Include="Migrations\202002230432036_MappingGamePlatform.designer.cs">
       <DependentUpon>202002230432036_MappingGamePlatform.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002251736495_UpdatingDatabaseGamePlatform.cs" />
+    <Compile Include="Migrations\202002251736495_UpdatingDatabaseGamePlatform.designer.cs">
+      <DependentUpon>202002251736495_UpdatingDatabaseGamePlatform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\GameControllerProjectContext.cs" />
-    <Compile Include="Persistence\Mapping\GamePlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlatformMap.cs" />
     <Compile Include="Persistence\Mapping\PlayerMap.cs" />
     <Compile Include="Persistence\Repositories\Base\RepositoryBase.cs" />
@@ -299,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002230432036_MappingGamePlatform.resx">
       <DependentUpon>202002230432036_MappingGamePlatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002251736495_UpdatingDatabaseGamePlatform.resx">
+      <DependentUpon>202002251736495_UpdatingDatabaseGamePlatform.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
