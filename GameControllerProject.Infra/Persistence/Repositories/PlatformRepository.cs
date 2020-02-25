@@ -30,9 +30,27 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             return _context.Platforms.Add(entity);
         }
 
-        public IQueryable<Platform> GetAll()
+        public new IQueryable<Platform> GetAll()
         {
             return _context.Platforms.Select(s => s);
+        }
+
+        public void Delete(Guid id)
+        {
+            var result = _context.Platforms.Find(id);
+            _context.Platforms.Remove(result);
+            _context.SaveChanges();
+        }
+
+        public new Platform Update(Platform entity)
+        {
+            var result = _context.Platforms.Find(entity.Id);
+            if (result == null)
+                throw new NullReferenceException("The requested platform for update was not found in the repository.");
+
+            result.Name = entity.Name;
+            _context.SaveChanges();
+            return result;
         }
 
         #endregion

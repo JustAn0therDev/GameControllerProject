@@ -41,11 +41,6 @@ namespace GameControllerProject.Domain.Services
         {
             Platform platform = new Platform(addPlatformRequest.PlatformName);
 
-            AddNotifications(platform);
-
-            if (IsInvalid())
-                return null;
-
             var result = _platformRepository.AddPlatform(platform);
 
 
@@ -53,6 +48,22 @@ namespace GameControllerProject.Domain.Services
                 throw new NullReferenceException("Platform could not be added");
 
             return (AddPlatformResponse)result;
+        }
+
+        public ModifyPlatformResponse ModifyPlatform(ModifyPlatformRequest request)
+        {
+            Platform platform = new Platform(request.Id, request.PlatformName);
+
+            var result = _platformRepository.Update(platform);
+
+            return (ModifyPlatformResponse)result;
+        }
+
+        public DeletePlatformResponse DeletePlatform(Guid id)
+        {
+            _platformRepository.Delete(id);
+
+            return new DeletePlatformResponse { Success = true, Message = "Platform deleted successfully." };
         }
     }
 }

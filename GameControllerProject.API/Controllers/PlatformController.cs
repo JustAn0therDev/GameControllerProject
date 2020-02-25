@@ -48,5 +48,35 @@ namespace GameControllerProject.API.Controllers
                 return await ResponseExceptionAsync(ex);
             }
         }
+
+        [HttpPost]
+        [Route("ModifyPlatform")]
+        public async Task<HttpResponseMessage> ModifyPlatform(ModifyPlatformRequest request)
+        {
+            try
+            {
+                var response = _platformService.ModifyPlatform(request);
+                return await ResponseAsync(response, _platformService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeletePlatform")]
+        public async Task<HttpResponseMessage> DeletePlatform(DeletePlatformRequest request)
+        {
+            try
+            {
+                var response = _platformService.DeletePlatform(request.Id);
+                return await ResponseAsync(response, _platformService);
+            }
+            catch (Exception ex)
+            {
+                return await ResponseExceptionAsync(ex);
+            }
+        }
     }
 }
