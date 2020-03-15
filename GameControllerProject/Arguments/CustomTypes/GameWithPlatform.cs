@@ -6,7 +6,6 @@ namespace GameControllerProject.Domain.Arguments.CustomTypes
     {
         public Entities.Game Game { get; set; }
         public List<Entities.Platform> Platforms { get; set; } = new List<Entities.Platform>();
-
         public GameWithPlatform(Entities.Game game, List<Entities.Platform> platforms)
         {
             Game = game;

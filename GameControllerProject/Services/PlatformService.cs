@@ -43,7 +43,6 @@ namespace GameControllerProject.Domain.Services
 
             var result = _platformRepository.AddPlatform(platform);
 
-
             if (result == null)
                 throw new NullReferenceException("Platform could not be added");
 

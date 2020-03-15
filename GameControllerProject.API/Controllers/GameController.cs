@@ -25,7 +25,7 @@ namespace GameControllerProject.API.Controllers
         {
             try
             {
-                GetGameResponse response = new GetGameResponse();
+                var response = new GetGameResponse();
                 switch (type.ToLower())
                 {
                     case "genre":

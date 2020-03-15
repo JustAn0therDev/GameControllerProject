@@ -1,5 +1,4 @@
 ﻿using GameControllerProject.Domain.Interfaces.Arguments;
-using System;
 
 namespace GameControllerProject.Domain.Arguments.Platform
 {

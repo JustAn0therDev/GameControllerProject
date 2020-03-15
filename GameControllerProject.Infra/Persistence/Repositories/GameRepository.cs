@@ -26,11 +26,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
 
         #region Public Methods
 
-        public new Game Add(Game entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public Game AddGame(Game entity)
         {
             _context.Games.Add(entity);
@@ -43,11 +38,6 @@ namespace GameControllerProject.Infra.Persistence.Repositories
             var result = _context.Games.Find(Id);
             _context.Games.Remove(result);
             _context.SaveChanges();
-        }
-
-        public new IQueryable<Game> GetAll()
-        {
-            throw new NotImplementedException();
         }
 
         public List<Game> GetAllGames()
